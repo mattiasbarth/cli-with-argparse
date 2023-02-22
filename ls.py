@@ -6,7 +6,8 @@ from pathlib import Path
 parser = argparse.ArgumentParser(
     prog="ls",
     description="List the content of a directory",
-    epilog="Thanks for using %(prog)s! :)"
+    epilog="Thanks for using %(prog)s! :)",
+    argument_default=argparse.SUPPRESS,
     )
 
 general = parser.add_argument_group("general output")
@@ -34,4 +35,8 @@ def build_output(entry, long=False):
     return entry.name
 
 for entry in target_dir.iterdir():
+    try:
+        long = args.long
+    except AttributeError:
+        long = False
     print(build_output(entry, long=args.long))
