@@ -11,10 +11,18 @@ parser = argparse.ArgumentParser(
     )
 
 general = parser.add_argument_group("general output")
-general.add_argument("path")
+general.add_argument("path",
+                     nargs="?",
+                     default=".",
+                     help="take the path to the target directory (default: %(default)s)",
+                     )
 
 detailed = parser.add_argument_group("detailed output")
-detailed.add_argument("-l", "--long", action="store_true")
+detailed.add_argument("-l",
+                      "--long",
+                      action="store_true",
+                      help="display detailed directory content",
+                      )
 
 args = parser.parse_args()
 
@@ -39,4 +47,4 @@ for entry in target_dir.iterdir():
         long = args.long
     except AttributeError:
         long = False
-    print(build_output(entry, long=args.long))
+    print(build_output(entry, long=long))
