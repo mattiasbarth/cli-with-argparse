@@ -29,6 +29,9 @@ args = parser.parse_args()
 target_dir = Path(args.path)
 
 if not target_dir.exists():
+    parser.exit(1, message="The target directory doesn't exist!")
+
+if not target_dir.exists():
     print("The target directory doesn't exist")
     raise SystemExit(1)
 
